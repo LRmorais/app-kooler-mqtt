@@ -38,7 +38,6 @@ import {DadosContext} from './mqttMessage.js';
       height: '50%',
      // width: 400,
       //justifyContent: 'flex-end',
-      //alignItems: 'center',
       marginTop:350
     },
     map: {

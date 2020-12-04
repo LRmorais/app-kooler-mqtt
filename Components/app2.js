@@ -1,13 +1,19 @@
 import React, {useContext} from 'react'
 import {DadosContext} from './mqttMessage.js';
-import { View, Text} from 'react-native';
+import { View, Text, StyleSheet} from 'react-native';
 
 
 const App2 = () => {
     const context = useContext(DadosContext)
     const {mensagem, setMensagem} = context
     return(
-        <View>
+        <View style={styles.container}>
+            <Text style={styles.txt}>Latitude</Text>
+            <Text>
+                {/* {mensagem} */}
+                
+            </Text>
+            <Text style={styles.txt}>Longitude</Text>
             <Text>
                 {mensagem}
             </Text>
@@ -16,3 +22,15 @@ const App2 = () => {
 }
 
 export default App2;
+
+const styles = StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      
+    },
+    txt: {    
+        color:'white',
+        margin:10,
+        
+    }
+  });
