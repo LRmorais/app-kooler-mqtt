@@ -36,9 +36,7 @@ import {DadosContext} from './mqttMessage.js';
     container: {
       ...StyleSheet.absoluteFillObject,
       height: '50%',
-     // width: 400,
-      //justifyContent: 'flex-end',
-      marginTop:350
+     
     },
     map: {
       ...StyleSheet.absoluteFillObject,

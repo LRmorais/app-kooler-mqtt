@@ -1,36 +1,57 @@
-
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Gauge from './Components/mqttGauge.js';
-import Maps from './Components/mqttMaps.js';
-import DadosProvider, {DadosContext} from './Components/mqttMessage.js';
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import App2 from './Components/app2.js';
+import Principal from './Components/principal.js';
+import Nuvem from './Components/nuvem.js';
+import { Button, Icon } from 'react-native-elements';
+import DadosProvider, { DadosContext } from './Components/mqttMessage.js';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <Text style={{marginTop:20, fontSize:20, color:'white'}}>Aplicativo em construção</Text>
-      <DadosProvider>
-        <Gauge/>
-        <Maps/>
-        <App2/>
-      </DadosProvider>
-
-    </View>
+    <DadosProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Kooler"
+          screenOptions={screenOptions}>
+          <Stack.Screen
+            name="Kooler"
+            component={Principal}
+            options={({ navigation }) => {
+              return {
+                title: "Kooler",
+                headerRight: () => (
+                  <Button
+                    onPress={() => navigation.navigate("Nuvem")}
+                    type="clear"
+                    icon={<Icon name="add" size={28} color="white" />}
+                  />
+                )
+              }
+            }}
+          />
+          <Stack.Screen
+            name="Nuvem"
+            component={Nuvem}
+            options={{
+              title: "Dados da Nuvem"
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </DadosProvider>
   );
 };
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
-  },
-});
-
-
 export default App;
+
+const screenOptions = {
+  headerStyle: {
+    backgroundColor: '#2c3e50'
+  },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    fontWeight: 'bold'
+  }
+};

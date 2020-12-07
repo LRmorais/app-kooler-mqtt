@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 
 export const DadosContext = React.createContext({})
 const DadosProvider = ({children}) =>{
-    const [mensagem, setMensagem] = useState();
+
+    const [mensagem, setMensagem] = useState([]);
+    const [id, setId] = useState('');
+    const [name, setName] = useState('')
+    const [pass, setPass] = useState('')
+
     const options = {
-        clientId: 'mqtt-board-panel-aa63a758',
+        clientId: 'mqtt-board-panel-7e94a82b',
         username: 'xp0NIKLjt1BTbB9paRlUJmg5wt3TmqQKFFlbfWkwLKgKbdXcS9Wpl0kHhcqtq71T',
         password: '',
     }
@@ -14,7 +19,6 @@ const DadosProvider = ({children}) =>{
 
     client.on('message', (topic, message)=> {
         message = message.toString()
-        console.log(message)
         setMensagem(message)
     })
     client.on('connect', ()=>{
@@ -22,7 +26,7 @@ const DadosProvider = ({children}) =>{
     })
     //console.log(mensagem)
     return(
-        <DadosContext.Provider value={{mensagem, setMensagem}}>
+        <DadosContext.Provider value={{mensagem,id,name,pass,setMensagem,setId,setName,setPass}}>
             {children}
         </DadosContext.Provider>
         )
