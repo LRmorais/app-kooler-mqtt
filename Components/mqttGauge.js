@@ -49,6 +49,7 @@ const Gauge = () =>{
         ]
       }
       />
+      <Text style={styles.text}>A temperatura ideal deve estar em torno de - 16°</Text>
     </View>
   )
 }
@@ -56,6 +57,13 @@ export default Gauge;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:20,
+    flex: 1,
+    backgroundColor: '#694fad',
+    padding: 10
   },
+  text:{
+    color:'white',
+    marginTop: 50,
+    fontSize: 20
+  }
 });

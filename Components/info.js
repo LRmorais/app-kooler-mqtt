@@ -1,33 +1,62 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { List } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-const DetailsScreen = ({navigation}) => {
-    return (
-      <View style={styles.container}>
-        <Text>Details Screen</Text>
-        <Button
-            title="Go to details screen...again"
-            onPress={() => navigation.push("Details")}
+
+const Info = ({ navigation }) => {
+
+  const partida = "Vacina 1"
+  return (
+    <View style={styles.container}>
+
+      <List.Section>
+        <List.Subheader style={{ fontSize: 20 }}>Vacinas </List.Subheader>
+        <List.Item
+          titleStyle={{ fontSize: 20 }}
+          title="First Item"
+          onPress={() => navigation.goBack("Home")}
+          left={() => <Icon name="desktop-outline" style={{ fontSize: 30, paddingLeft: 20, marginRight: 20 }} />} />
+
+        <List.Item
+          titleStyle={{ fontSize: 20 }}
+          title={partida}
+          onPress={() => navigation.goBack("Home")}
+          left={() => <Icon name="desktop-outline" style={{ fontSize: 30, paddingLeft: 20, marginRight: 20 }} />}
         />
-        <Button
-            title="Go to home"
-            onPress={() => navigation.navigate("Home")}
+
+        <List.Item
+          titleStyle={{ fontSize: 20 }}
+          title="Second Item"
+          onPress={() => navigation.goBack("Home")}
+          left={() => <Icon name="desktop-outline" style={{ fontSize: 30, paddingLeft: 20, marginRight: 20 }} />}
         />
-        <Button
-            title="Go back"
-            onPress={() => navigation.goBack()}
+
+        <List.Item
+          titleStyle={{ fontSize: 20 }}
+          title="Second Item"
+          onPress={() => navigation.goBack("Home")}
+          left={() => <Icon name="desktop-outline" style={{ fontSize: 30, paddingLeft: 20, marginRight: 20 }} />}
         />
-      </View>
-    );
+
+        <List.Item
+          titleStyle={{ fontSize: 20 }}
+          title="Second Item"
+          onPress={() => navigation.goBack("Home")}
+          left={() => <Icon name="desktop-outline" style={{ fontSize: 30, paddingLeft: 20, marginRight: 20 }} />}
+        />
+      </List.Section>
+    </View>
+  );
 };
-export default DetailsScreen;
+export default Info;
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1, 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      backgroundColor: '#009387'
-      
-    },
-  });
+  container: {
+    flex: 1,
+    //alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: '#009387'
+
+  },
+});

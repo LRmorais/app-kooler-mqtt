@@ -1,4 +1,8 @@
 import React from 'react';
+
+// importação do Provider do material ui para customizações
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+
 // importação do React Navigator v5, bottom tabs e stack para criar um header dinamico header
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -19,15 +23,28 @@ import DetailsScreen from './Components/info.js';
 const Tab = createMaterialBottomTabNavigator();
 // usado só para criar headers dinamicos
 const DetailsStack = createStackNavigator();
-const NuvemStack = createStackNavigator()
-const PrincipalStack = createStackNavigator()
+const NuvemStack = createStackNavigator();
+const PrincipalStack = createStackNavigator();
+const TempStack = createStackNavigator();
+
+// customizãçoes do material ui
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#1f65ff',
+  },
+  
+}
 
 function App() {
   return (
     <DadosProvider>
+      <PaperProvider theme={theme}>
       <NavigationContainer>
         <Tab.Navigator
-          initialRouteName="Dashboard"
+          initialRouteName="Home"
           activeColor="white"
           shifting={true}
         >
@@ -36,7 +53,7 @@ function App() {
             component={PrincipalStackScreen}
             options={{
               tabBarLabel: 'Localização',
-              tabBarColor: '#694fad',
+              tabBarColor: '#2c3e50',
               tabBarIcon: ({ color }) => (
                 <Icon name="navigate-outline" color={color} size={26} />
 
@@ -44,26 +61,16 @@ function App() {
             }} />
           <Tab.Screen
             name="Dados"
-            component={Temp}
+            component={TempStackScreen}
             options={{
               tabBarLabel: 'Temperatura',
-              tabBarColor: '#d02860',
+              tabBarColor: '#694fad',
               tabBarIcon: ({ color }) => (
                 <Icon name="thermometer-outline" color={color} size={26} />
               ),
             }}
           />
-          <Tab.Screen
-            name="Nuvem"
-            component={NuvemStacksScreen}
-            options={{
-              tabBarLabel: 'Cloud',
-              tabBarColor: '#1f65ff',
-              tabBarIcon: ({ color }) => (
-                <Icon name="cloud-outline"color={color} size={26} />
-              ),
-            }}
-          />
+
           <Tab.Screen
             name="Info"
             component={DetailsStackScreen}
@@ -75,12 +82,56 @@ function App() {
               ),
             }}
           />
+
+          <Tab.Screen
+            name="Nuvem"
+            component={NuvemStacksScreen}
+            options={{
+              tabBarLabel: 'Cloud',
+              tabBarColor: '#1f65ff',
+              tabBarIcon: ({ color }) => (
+                <Icon name="cloud-outline"color={color} size={26} />
+              ),
+            }}
+          />
+          
         </Tab.Navigator>
       </NavigationContainer>
+      </PaperProvider>
     </DadosProvider>
   );
 }
 export default App;
+
+const PrincipalStackScreen = () => (
+  <PrincipalStack.Navigator screenOptions={{
+          headerStyle: {
+          backgroundColor: '#2c3e50',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+          fontWeight: 'normal'
+          }
+      }}>
+          <PrincipalStack.Screen name="Localização" component={Principal} 
+          />
+  </PrincipalStack.Navigator>
+  );
+
+  const TempStackScreen = () => (
+    <TempStack.Navigator screenOptions={{
+            headerStyle: {
+            backgroundColor: '#694fad',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+            fontWeight: 'normal'
+            }
+        }}>
+            <TempStack.Screen name="Localização" component={Temp} 
+            />
+    </TempStack.Navigator>
+    );
 
 const NuvemStacksScreen = () => (
   <NuvemStack.Navigator screenOptions={{
@@ -112,17 +163,4 @@ const NuvemStacksScreen = () => (
     </DetailsStack.Navigator>
     );
 
-    const PrincipalStackScreen = () => (
-      <PrincipalStack.Navigator screenOptions={{
-              headerStyle: {
-              backgroundColor: '#694fad',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-              fontWeight: 'normal'
-              }
-          }}>
-              <PrincipalStack.Screen name="Localização" component={Principal} 
-              />
-      </PrincipalStack.Navigator>
-      );
+    
