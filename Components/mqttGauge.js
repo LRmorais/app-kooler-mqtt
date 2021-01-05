@@ -2,6 +2,8 @@ import React, {useContext} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import {DadosContext} from './mqttMessage.js';
 import RNSpeedometer from 'react-native-speedometer'
+import { List } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Gauge = () =>{
   const context = useContext(DadosContext)
@@ -49,7 +51,15 @@ const Gauge = () =>{
         ]
       }
       />
-      <Text style={styles.text}>A temperatura ideal deve estar em torno de - 16°</Text>
+      <View style={styles.text}></View>
+      <List.Item
+          titleStyle={{ fontSize: 20 }}
+          descriptionStyle={{fontSize: 20}}
+          title="Temperatura Ideal"
+          description="A temperatura ideal deve estar em torno de - 16°"
+          onPress={() => navigation.goBack("Home")}
+          left={() => <Icon name="thermometer-outline" style={{ fontSize: 30, marginRight: 15 }} />}
+        />
     </View>
   )
 }
